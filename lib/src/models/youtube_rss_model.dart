@@ -1,3 +1,5 @@
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import '../../helper/secure_print.dart';
 
 class YoutubeRSSModel {
@@ -19,7 +21,10 @@ class YoutubeRSSModel {
     this.channelAuthorUrl,
     this.channelPublishedAt,
     this.entryList,
-  });
+    String? locale = "pt_BR"
+  }) {
+    initializeDateFormatting(locale, null);
+  }
 
   void log() {
     SecurePrint.log("##### YoutubeRSSModel #####");
@@ -37,6 +42,7 @@ class YoutubeRSSModel {
 }
 
 class YoutubeVideo {
+
   String? title;
   String? link;
   DateTime? published;
@@ -54,6 +60,11 @@ class YoutubeVideo {
     this.views,
     this.likes,
   });
+
+  String? getPublished([String? newPattern = "dd/MM/yyyy HH:mm:ss", String? locale = "pt_BR"]) {
+    DateFormat formatter = DateFormat(newPattern, locale);
+    return formatter.format(published!);
+  }
 
   void log() {
     SecurePrint.log("##### YoutubeVideo #####");
