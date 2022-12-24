@@ -61,9 +61,19 @@ class YoutubeVideo {
     this.likes,
   });
 
-  String? getPublished([String? newPattern = "dd/MM/yyyy HH:mm:ss", String? locale = "pt_BR"]) {
+  String? getPublished([String? newPattern = "dd/MM/yyyy HH:mm", String? locale = "pt_BR"]) {
     DateFormat formatter = DateFormat(newPattern, locale);
     return formatter.format(published!);
+  }
+
+  String? getViews({String? locale = "pt_BR"}) {
+    final formatter = NumberFormat.decimalPattern(locale);
+    return formatter.format(views);
+  }
+
+  String? getLikes({String? locale = "pt_BR"}) {
+    final formatter = NumberFormat.decimalPattern(locale);
+    return formatter.format(likes);
   }
 
   void log() {
